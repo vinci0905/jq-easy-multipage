@@ -9,11 +9,11 @@ npm run build
 https://github.com/aralejs
 https://github.com/aliceui
 ```
-## ejs include header
+## include header html with ejs
 ```bash
 <%- include('common/header/index.html') %>
 ```
-## header module
+## import header module
 ```bash
 import '../common/header';
 ```
