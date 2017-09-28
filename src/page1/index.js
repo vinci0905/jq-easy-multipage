@@ -12,7 +12,7 @@ import 'alice-tab';
 import './style.less';
 
 
-var template = require("./file.tpl");
+import template from './file.tpl';
 var context = {title: "My New Post", body: "This is my first post!"};
 var html    = template(context);
 console.log(html);
