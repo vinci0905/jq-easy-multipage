@@ -5,9 +5,12 @@
   <title>page1</title>
 </head>
 <body id="c">
-	<%- include('common/header/index.html') %>
-	<h1>this is page1</h1>
 	
+	#include("./common/header/index.html")
+	
+	<h1>this is page1</h1>
+	<img src="page1/icon.png">
+	<img src="./page1/icon.png">
 	<a href="javascript:;" class="ui-button ui-button-lorange">橙色大按钮</a>
 	<a href="javascript:;" class="ui-button ui-button-morange">橙色中按钮</a>
 	<a href="javascript:;" class="ui-button ui-button-sorange">橙色小按钮</a>
@@ -35,9 +38,9 @@
 	<div style="width:100%;height:50px"></div>
 	<div id="slide-demo-2" class="slide-demo">
 	    <ul data-role="content" class="ui-switchable-content">
-	        <li class="hidden ui-switchable-panel"><a href="#"><img src="img/icon.png" /></a></li>
-	        <li class="ui-switchable-panel"><a href="#"><img src="img/icon.png" /></a></li>
-	        <li class="hidden ui-switchable-panel"><a href="#"><img src="img/icon.png" /></a></li>
+	        <li class="hidden ui-switchable-panel"><a href="#"><img src="./page1/icon.png" /></a></li>
+	        <li class="ui-switchable-panel"><a href="#"><img src="./page1/icon.png" /></a></li>
+	        <li class="hidden ui-switchable-panel"><a href="#"><img src="./page1/icon.png" /></a></li>
 	    </ul>
 	    <ul data-role="nav" class="ui-switchable-nav">
 	        <li class="ui-switchable-trigger">●</li>
@@ -115,7 +118,139 @@
 	    </table>
 	</div>
 
+<form class="ui-form" name="" method="post" action="#" id="">
+    <fieldset>
+        <legend>表单标题</legend>
 
+        <div class="ui-form-item ui-form-item-error">
+            <label for="" class="ui-label">表单项文本</label>
+            <p class="ui-form-text">一个个文字文字
+        </div>
+
+        <div class="ui-form-item">
+            <label for="" class="ui-label">
+                <span class="ui-form-required">*</span>表单项文本
+            </label>
+            <input class="ui-input" type="text"> <span class="ui-form-other"><a href="#">添加备注</a></span>
+            <p class="ui-form-explain">默认文案。</p>
+        </div>
+
+        <div class="ui-form-item ui-form-item-error">
+            <label for="" class="ui-label">表单项文本</label>
+            <input class="ui-input ui-input-large" type="text"> <span class="ui-form-other"><a href="#">表单项其他</a></span>
+            <p class="ui-form-explain ui-tiptext ui-tiptext-error">
+                <i class="ui-tiptext-icon iconfont" title="出错">&#xF045;</i>
+                此在DOM上保存属性值，请使用data-xxx的形式。
+            </p>
+        </div>
+
+        <div class="ui-form-item ui-form-item-error ui-form-item-focus">
+            <label for="" class="ui-label">表单项文本</label>
+            <input class="ui-input" type="text"> <span class="ui-form-other"><a href="#">表单项其他</a></span>
+            <p class="ui-form-explain ui-tiptext ui-tiptext-error">
+                <i class="ui-tiptext-icon iconfont" title="出错">&#xF045;</i>
+                ui-form-item-focus 的效果。
+            </p>
+        </div>
+              
+        <div class="ui-form-item ui-form-item-success">
+            <label for="" class="ui-label">表单项文本</label>
+            <textarea class="ui-textarea">一二三四五六七八九十</textarea>
+            <p class="ui-form-explain ui-tiptext ui-tiptext-success">
+                <i class="ui-tiptext-icon iconfont" title="成功">&#xF049;</i>
+                成功文案。
+            </p>
+        </div>
+         
+        <div class="ui-form-item">
+            <label for="" class="ui-label">下拉选择</label>
+            <select id="province" name="province">
+                <option value="">
+                请选择
+                </option>
+                <option value="北京">
+                北京
+                </option>
+                <option value="上海">
+                上海
+                </option>
+                <option value="天津">
+                天津
+                </option>
+                <option value="浙江">
+                浙江
+                </option>
+            </select>
+            <p class="ui-form-explain">更多地区即将开通，敬请期待。</p>
+        </div>
+          
+        <div class="ui-form-item">
+            <label for="" class="ui-label ui-label-reset">不可用input</label>
+            <input class="ui-input ui-input-disable" type="text" disabled>       
+            <p class="ui-form-explain">目前不可用</p>
+        </div>
+         
+        <div class="ui-form-item">
+            <label for="" class="ui-label">验证码</label>
+            <input class="ui-input ui-input-checkcode" type="text" data-explain="请输入右图中字符，不区分大小写。" maxlength="4" autocomplete="off" value="" name="fourcode">
+            <img class="ui-checkcode-imgcode-img" align="absMiddle" alt="请输入您看到的内容" src="https://omeo.alipay.com/service/checkcode?sessionID=82012ab6b1f4ed9e675fb9092a25cb3b&r=0.9321065918075809"  title="点击刷新图片校验码">
+            <a href="#">看不清，换一张</a>
+            <div class="ui-form-explain">请输入右图中字符，不区分大小写。</div>
+        </div>
+ 
+        <div class="ui-form-item">
+            <label for="test">
+                <input class="ui-checkbox" id="test" value="" type="checkbox">
+                我已阅读并接受自主缴费服务协议
+            </label>
+        </div>
+ 
+        <div class="ui-form-item">
+            <input type="submit" class="ui-button ui-button-morange" value="确定">
+            <input type="button" class="ui-button ui-button-mwhite" value="取消">
+        </div>
+    </fieldset>
+</form>
+
+
+<div class="ui-paging">
+    <a href="#" class="ui-paging-prev">
+        <i class="iconfont" title="左三角形">&#xF039;</i> 上一页
+    </a>
+    <a href="#" class="ui-paging-item">1</a>
+    <a href="#" class="ui-paging-item ui-paging-current">2</a>
+    <a href="#" class="ui-paging-item">3</a>
+    <a href="#" class="ui-paging-item">4</a>
+    <a href="#" class="ui-paging-item">5</a>
+    <a href="#" class="ui-paging-item">6</a>
+    <a href="#" class="ui-paging-item">7</a>
+    <span class="ui-paging-ellipsis">...</span>
+    <a href="#" class="ui-paging-item">24</a>
+    <a href="#" class="ui-paging-next">
+        下一页 <i class="iconfont" title="右三角形">&#xF03A;</i>
+    </a>
+    <span class="ui-paging-info"><span class="ui-paging-bold">5/7</span>页</span>
+    <span class="ui-paging-which"><input name="some_name" value="6" type="text"></span>
+    <a class="ui-paging-info ui-paging-goto" href="#">跳转</a>
+</div>
+
+
+<div class="ui-tab">
+    <ul class="ui-tab-items">
+        <li class="ui-tab-item ui-tab-item-current">
+            <a href="javascript:;">全部交易</a>
+        </li>
+        <li class="ui-tab-item">
+            <a href="javascript:;">进行中的交易</a>
+        </li>
+        <li class="ui-tab-item">
+            <a href="javascript:;">等待发货的交易</a>
+        </li>
+        <li class="ui-tab-item">
+            <a href="javascript:;">未确认收获的交易</a>
+        </li>
+    </ul>
+</div>
 
 </body>
 </html>

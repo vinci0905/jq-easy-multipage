@@ -5,10 +5,17 @@ import Overlay from 'arale-overlay';
 import Popup from 'arale-popup';
 import { Slide } from 'arale-switchable';
 import 'alice-table';
+import 'alice-form';
+import 'alice-paging';
+import 'alice-iconfont';
+import 'alice-tab';
 import './style.less';
 
 
-
+var template = require("./file.tpl");
+var context = {title: "My New Post", body: "This is my first post!"};
+var html    = template(context);
+console.log(html);
 
 // 箭头位置
 new Tip({

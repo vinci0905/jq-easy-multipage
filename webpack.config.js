@@ -3,6 +3,7 @@ const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
 var ROOT = path.resolve(__dirname);
 var ENV = process.env.ENV;
@@ -18,7 +19,7 @@ for (chunk in entries) {
   if(chunk == 'vendor') continue;
   plugins.push(new HtmlWebpackPlugin({
     filename: chunk + '.html',
-    template: 'ejs-render-loader!src/' + chunk + '.html',
+    template: 'html-withimg-loader?min=false!src/' + chunk + '.html',
     chunks: ['vendor', chunk]
   }));
 }
@@ -31,8 +32,50 @@ const extractLess = new ExtractTextPlugin({
 
 if(ENV != 'DEV') {
   plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
+  plugins.push(
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /\.css$/g,
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: { discardComments: { removeAll: true } },
+        canPrint: true
+      })
+  );
   plugins.push(new CleanWebpackPlugin(['dist']));
   plugins.push(new webpack.HashedModuleIdsPlugin());
+}
+
+/*资源*/
+var rules = [];
+if(ENV == 'DEV') {
+  rules.push({
+      test: /\.less$/,
+      use: [{
+          loader: "style-loader"
+      }, {
+          loader: "css-loader"
+      }, {
+          loader: "less-loader"
+      }]
+  });
+} else {
+  rules.push({
+    test: /\.less$/,
+    use: extractLess.extract({
+        use: [{
+            loader: "css-loader", 
+            options: {
+                sourceMap: true
+            }
+        }, {
+            loader: "less-loader", 
+            options: {
+                sourceMap: true
+            }
+        }],
+        // use style-loader in development
+        fallback: "style-loader"
+    })
+  });
 }
 
 
@@ -45,7 +88,7 @@ module.exports = {
     publicPath: '/'
   },
   module: {
-  	rules: [
+  	rules: rules.concat([
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -53,24 +96,6 @@ module.exports = {
           use: "css-loader"
         })
       },
-  		{
-  			test: /\.less$/,
-  			use: extractLess.extract({
-            use: [{
-                loader: "css-loader", 
-                options: {
-                    sourceMap: true
-                }
-            }, {
-                loader: "less-loader", 
-                options: {
-                    sourceMap: true
-                }
-            }],
-            // use style-loader in development
-            fallback: "style-loader"
-        })
-  		},
   		{
   			test: /\.(png|svg|jpg|gif)$/,
   			use: [
@@ -95,8 +120,14 @@ module.exports = {
           'babel-loader'
         ],
         exclude: /node_modules/
+      },
+      {
+        test: /\.tpl$/,
+        use: [
+          'handlebars-loader'
+        ]
       }
-  	]
+  	])
   },
   plugins: plugins.concat([
     new webpack.HotModuleReplacementPlugin(),
