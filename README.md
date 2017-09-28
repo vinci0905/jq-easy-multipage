@@ -12,7 +12,7 @@ https://github.com/aliceui
 ## header module 模块化
 ```bash
 import '../common/header';
-<%- include('common/header/index.html') %>
+#include("./common/header/index.html")
 ```
 
 
